@@ -1,0 +1,7 @@
+# a = input("Enter your Name")
+# print("Hello, " + a)
+b = int(input("Enter your Age"))
+print(f'you are "{b}" year old')
+print(f"you are '{b}' year old")
+print(f'you are {b} year old')
+print(type(b))
