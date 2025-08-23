@@ -29,6 +29,8 @@ print(l3)
 l4 =[]
 l4.extend(['batch','python',30])
 print(l4)
-# del l3
+del l3[3]
+print(l3)
+del l3
 # print(l3)
 
