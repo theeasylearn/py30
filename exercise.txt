@@ -47,3 +47,11 @@
 *   *   *
 *       *
 * * * * * 
+
+1) write a program to count digits,letters,vowels,consonents and symbols and given string using for loop 
+
+2) write a program to reverse given string using for loop 
+
+3) write a program to check whether given string is palindrom or not 
+    input : dad reverse dad 
+    input : friend reverse dneirf 
