@@ -55,3 +55,13 @@
 3) write a program to check whether given string is palindrom or not 
     input : dad reverse dad 
     input : friend reverse dneirf 
+
+
+user defined function
+-----------------------------------------------
+
+1) create program which has function that return dollar of given rupees 
+2) create program which has function that return interest of given amount, rate, year 
+3) create program which has function that return True or False. if given year is leap year it return true else false 
+4) create program which has function that returns factorial of given number 
+5) create program which has function that returns capital of given country
