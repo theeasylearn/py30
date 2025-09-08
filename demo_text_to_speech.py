@@ -1,5 +1,7 @@
 import pyttsx3
-
+from gtts import gTTS
+from playsound import playsound
+import os
 def text_to_speech(text, rate=200, volume=1.0, voice_index=0):
     # Initialize the TTS engine
     engine = pyttsx3.init()
