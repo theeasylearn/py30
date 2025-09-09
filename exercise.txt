@@ -65,3 +65,13 @@ user defined function
 3) create program which has function that return True or False. if given year is leap year it return true else false 
 4) create program which has function that returns factorial of given number 
 5) create program which has function that returns capital of given country
+
+
+package.
+1) create python script that will download youtube video of given url 
+for example url is https://www.youtube.com/watch?v=xV9HnITo2C0
+
+2) create python script that will convert video into audio save it as mp3
+
+3) create transcript of audio into text 
+
