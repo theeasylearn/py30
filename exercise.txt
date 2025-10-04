@@ -75,3 +75,8 @@ for example url is https://www.youtube.com/watch?v=xV9HnITo2C0
 
 3) create transcript of audio into text 
 
+date time 
+1) write a program to findout smallest person from 3 person family. 
+   accept 3 person birth date from user 
+
+2) write a program to findout elder person from all students studying in class. store at least 5 person birth date in list. 
