@@ -4,7 +4,7 @@
 def getFactorial(number,multiplier):
     if multiplier<number:
         multiplier  = multiplier + 1  #3
-        return multiplier * getFactorial(number,multiplier) #5 5
+        return multiplier * d(number,multiplier) #5 5
     return 1
 number = int(input("Enter number to get factorial"))
 multiplier = 1
