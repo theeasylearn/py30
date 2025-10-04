@@ -1,0 +1,6 @@
+pytubefix
+moviepy
+SpeechRecognition
+librosa
+soundfile
+numpy
