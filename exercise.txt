@@ -80,3 +80,6 @@ date time
    accept 3 person birth date from user 
 
 2) write a program to findout elder person from all students studying in class. store at least 5 person birth date in list. 
+
+3) modify program 53, findout days between today and user's next birthday.
+4) modify program 54, make sure that user can book maximum 90 days apointment in advance. 
