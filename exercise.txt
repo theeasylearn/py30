@@ -83,3 +83,8 @@ date time
 
 3) modify program 53, findout days between today and user's next birthday.
 4) modify program 54, make sure that user can book maximum 90 days apointment in advance. 
+
+file management
+1) write a program to accept folder name from user and delete all files in that folder 
+
+2) write a program to accept folder name and copy it as another folder name 

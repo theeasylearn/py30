@@ -2,8 +2,8 @@
 import errno
 try:
     filename = input("Enter file name to write data")
-    mode = "w" 
-    #if file does not exist, new file will be created, else existing data will be deleted and new data will be stored
+    mode = "a" #append mode (write new data at the end of file) 
+    #if file does not exist, new file will be created, otherwise existing data will be kept and new data will be stored at the end of file
     file = open(filename,mode)
     while True:
         friend = input("Enter your friend name (type exit to stop)")
@@ -11,7 +11,7 @@ try:
             break  #loop stop 
         else:
             #write friend name into file 
-            file.write(friend + "\n")
+            file.write("\n" + friend)
 
     file.close()
     print("file has been saved...")
