@@ -88,3 +88,10 @@ file management
 1) write a program to accept folder name from user and delete all files in that folder 
 
 2) write a program to accept folder name and copy it as another folder name 
+
+class 
+-----------------
+1) Create class Product store name,price,stock as instance variable using constructor. also add method display which will show name, price and stock. also add method printValue which will display total value of product  
+
+create 3 objects using different name, price and stock and also call display method 
+
