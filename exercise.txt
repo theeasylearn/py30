@@ -96,5 +96,18 @@ class
 
 create 3 objects using different name, price and stock and also call display method 
 
-exercise 
+oop exercise 
 --------------------------------------------------------------------------------------------
+Exercise 1 (Single-Level):Create inherit byVehicleinherit by with inherit bystart()inherit by/inherit bystop()inherit by; inherit into inherit byCarinherit by adding inherit bydrive()inherit by and inherit byshow_actions()inherit by using inherit bysuper()inherit by and inherit byselfinherit by.  
+
+Exercise 2 (Multi-Level):Create class inherit byEmployeeinherit by inherit by inherit byManagerinherit by inherit by inherit byCEOinherit by, override inherit bywork()inherit by at each level using inherit bysuper().work()inherit by.  
+Hint: Call parent inherit bywork()inherit by then add new text.
+
+Exercise 3 (Hierarchical):inherit byShapeinherit by has inherit byget_info() inherit by; inherit byTriangleinherit by and inherit byRectangleinherit by inherit and compute area using inherit bysuper().get_info()inherit by.  
+
+
+Exercise 4 (Multiple):inherit by Flyableinherit by has inherit byfly() inherit by, inherit bySwimmableinherit by has inherit byswim()inherit by; inherit byDuckinherit by inherits both and calls all in inherit bydo_all()inherit by via inherit byselfinherit by.  
+
+Exercise 5 (Hybrid):inherit byLivingThinginherit by inherit by inherit by Animal inherit by inherit by inherit byPetinherit by; inherit byDoginherit by and inherit byCatinherit by inherit inherit byAnimalinherit by and inherit byPetinherit by, override whatICanDo method in all class accept LivingThing class 
+
+Exercise 6 (Multi-Level Inheritance with Constructor Arguments): Create Feet inherit by Meter inherit by Kilometer classes. foot class has method getFeet which returns feet, Meter class has method getMeter which should return Meter calculated using getFeet method. and Kilometer class has method getKM which calculate and return KM using getMeter method 
