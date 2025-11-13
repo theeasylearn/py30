@@ -1,4 +1,4 @@
-#example of hiearchical inheritance 
+#example of hierarchical inheritance 
 #parent/super/base class
 class MyMath:
     def getPi(self):

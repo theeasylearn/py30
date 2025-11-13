@@ -96,3 +96,5 @@ class
 
 create 3 objects using different name, price and stock and also call display method 
 
+exercise 
+--------------------------------------------------------------------------------------------
