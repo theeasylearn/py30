@@ -1,0 +1,29 @@
+Lecture's Payment management system
+---------------------------------
+Tables 
+    course (id,title,fees,duration,description)
+    batch (id,courseid,startdate,enddate,classtime)
+    subject (id,courseid,title,rate)
+    teacher (id,name,mobile,email,gender,qulification,experience)
+    lecture(id,teacherid,subjectid,batchid,duration,amount,lecturedate)
+        
+Module 
+    course management  
+        insert,update,delete,select
+    batch management
+        insert,update,delete,select
+    subject management
+        insert,update,delete,select
+    teacher management
+        insert,update,delete,select
+    lecture management
+        insert,select
+    payout management
+        generate of specific teacher between given date
+    reports
+        generate batch wise lecture detail between given date 
+        generate batch wise lecture detail with total amount
+         
+
+
+
