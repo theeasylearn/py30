@@ -7,3 +7,12 @@ except mycon.Errors as e:
     print('error in connection')
     print(e.errno)
     print(e.msg)
+
+#create function 
+def run(sql,values,message):
+    #create cursor
+    mycursor = database.cursor()
+    #run sql command 
+    mycursor.execute(sql,values)
+    database.commit()
+    print(message)

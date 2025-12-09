@@ -1,3 +1,4 @@
+import connection as con 
 print("Saral Billing software")
 while True:
     print("Press 1 for Product management")
@@ -18,7 +19,15 @@ while True:
             elif product_choice == 2:
                 print("I will edit product")
             elif product_choice == 3:
-                print("I add new product")
+                sql = "insert into product (name,price,stock,description,weight,size) values (%s,%s,%s,%s,%s,%s)"
+                name = input("Enter product name: ")
+                price = float(input("Enter price: "))
+                stock = int(input("Enter stock quantity: "))
+                description = input("Enter description: ")
+                weight = float(input("Enter weight: "))
+                size = input("Enter size: ")
+                values = [name,price,stock,description,weight,size] #list
+                con.run(sql,values,'new product added')
             elif product_choice == 4:
                 print("I delete product")
             elif product_choice == 0:
