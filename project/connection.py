@@ -1,5 +1,6 @@
 #write code to connect with mysql 
 import mysql.connector as mycon
+import mysql
 try:
     database = mycon.connect(host='localhost',user='root',passwd='',database='py30',port='3306')
     print('database connection created....')
@@ -10,9 +11,25 @@ except mycon.Errors as e:
 
 #create function 
 def run(sql,values,message):
-    #create cursor
-    mycursor = database.cursor()
-    #run sql command 
-    mycursor.execute(sql,values)
-    database.commit()
-    print(message)
+    try:
+        command = database.cursor() #create cursor
+        command.execute(sql,values) 
+        database.commit()
+        print(message)
+        key = input("press ENTER to continue....")
+    except mysql.connector.errors.ProgrammingError as error:
+        print("oops something went wrong, contact developer")
+        print(error)
+def fetch(sql,values=None):
+    try:
+        mycursor = database.cursor(dictionary=True)
+        if values == None:
+            mycursor.execute(sql)   
+        else:
+            mycursor.execute(sql,values)   
+        table = mycursor.fetchall() #return list of dictonary
+        return table
+    except mysql.connector.errors.ProgrammingError as error:
+        print("oops something went wrong, contact developer")
+        print(error)
+        return None
