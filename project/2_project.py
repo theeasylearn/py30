@@ -1,4 +1,39 @@
 import connection as con 
+import shutil
+columns = shutil.get_terminal_size().columns
+def input_with_default(prompt, current_value):
+    user_input = input(f"{prompt} [{current_value}]: ").strip()
+    return current_value if user_input == "" else user_input
+def display_no_record_found():
+    print("*"*columns)
+    temp = "No records found"
+    # print message in center of screen                            
+    print(temp.center(columns)) 
+    print("*"*columns)
+def display_products():
+    search = input("Enter product name to search(press enter to search all)")
+    start = 0      
+    while True:
+        if len(search) == 0:
+            sql = "select id,name,price,stock,description,weight,size from product order by name limit %s,10"
+            values = [start]
+        else:
+            search = f"%{search}%"
+            sql = "select id,name,price,stock,description,weight,size from product where name like %s order by name limit %s,10"
+            values = [search,start]
+        table = con.fetch(sql,values)
+        if len(table)>0:
+            print(f"{'ID':<4}{'NAME':<48}{'PRICE':<8}{'STOCK':<6}{'WEIGHT':<6}{'SIZE':<10}{'DESCRIPTION':<4}")
+            print("_"*columns)
+            for row in table:
+                output = f"{row['id']:<4}{row['name']:<48}{row['price']:<8}{row['stock']:<6}{row['weight']:<6}{row['size']:<10}{row['description']:<4}"
+                print(output)  
+            start+=10
+            key = input("Press enter to see other products")
+        else:
+            if start == 0:
+                display_no_record_found()
+            break 
 print("Saral Billing software")
 while True:
     print("Press 1 for Product management")
@@ -15,29 +50,31 @@ while True:
             print("Press 0 to return to main manu")
             product_choice = int(input("Enter your choice (0 to 4)"))
             if product_choice == 1:
-                 search = input("Enter product name to search(press enter to search all)")
-                 start = 0
-                 
-                 while True:
-                    if len(search) == 0:
-                        sql = "select id,name,price,stock,description,weight,size from product order by name limit %s,10"
-                        values = [start]
-                    else:
-                        sql = "select id,name,price,stock,description,weight,size from product where name=%s order by name limit %s,10"
-                        values = [search,start]
-                    table = con.fetch(sql,values)
-                    if len(table)>0:
-                        print(f"{'ID':<4}{'NAME':<48}{'PRICE':<8}{'STOCK':<6}{'WEIGHT':<6}{'SIZE':<10}{'DESCRIPTION':<4}")
-                        print("_"*100)
-                        for row in table:
-                            output = f"{row['id']:<4}{row['name']:<48}{row['price']:<8}{row['stock']:<6}{row['weight']:<6}{row['size']:<10}{row['description']:<4}"
-                            print(output)  
-                        start+=10
-                        key = input("Press enter to see other products")
-                    else:
-                        break 
+                display_products()
             elif product_choice == 2:
-                print("I will edit product")
+                display_products()
+                productid = int(input("Enter product id to edit"))
+                sql = 'select id,name,price,stock,weight,size,description from product where id = %s'
+                values = [productid]
+                table = con.fetch(sql,values)
+                if len(table) == 0:
+                    display_no_record_found()
+                else:
+                    #product id found
+                    name = table[0]['name']
+                    price = table[0]['price']
+                    stock = table[0]['stock']
+                    weight = table[0]['weight']
+                    size = table[0]['size']
+                    description = table[0]['description']
+                    name = input_with_default("Enter name", table[0]['name'])
+                    price = input_with_default("Enter price", table[0]['price'])
+                    stock = input_with_default("Enter stock", table[0]['stock'])
+                    weight = input_with_default("Enter weight", table[0]['weight'])
+                    size = input_with_default("Enter size", table[0]['size'])
+                    description = input_with_default("Enter description", table[0]['description'])
+                    #update row 
+                    
             elif product_choice == 3:
                 sql = "insert into product(name,price,stock,description,weight,size) values (%s,%s,%s,%s,%s,%s)"
                 try:

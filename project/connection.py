@@ -9,7 +9,7 @@ except mycon.Errors as e:
     print(e.errno)
     print(e.msg)
 
-#create function 
+#create function to execute only insert,update,delete function
 def run(sql,values,message):
     try:
         command = database.cursor() #create cursor
@@ -20,6 +20,7 @@ def run(sql,values,message):
     except mysql.connector.errors.ProgrammingError as error:
         print("oops something went wrong, contact developer")
         print(error)
+#create function to fetch data from table
 def fetch(sql,values=None):
     try:
         mycursor = database.cursor(dictionary=True)
