@@ -34,6 +34,20 @@ def display_products():
             if start == 0:
                 display_no_record_found()
             break 
+def display_bill_items():
+    sql = "select i.id,productid,qty,i.price,name from item i,product p where i.productid=p.id order by i.id"
+    table = con.fetch(sql)
+    if len(table) == 0:
+        display_no_record_found()
+    else:
+        heading = f"{'ItemID':<10}{'Prod ID':<10}{'Name':<48}{'Price':<10}{'Qty':<10}{'Total':<10}"
+        print(heading)
+        print("-" * len(heading))
+        for row in table:
+            itemTotal = row['price'] * row['qty']
+            output = f"{row['id']:<10}{row['productid']:<10}{row['name']:<48}{row['price']:<10}{row['qty']:<10}{itemTotal:<10}"
+            print(output)
+        key = input("press enter to continue")
 def product_management():
     print("welcome to Product management")
     while True:
@@ -134,9 +148,20 @@ def bill_management():
                     con.run(sql,values,'Item added into bill')
 
         elif bill_choice == 2:
-            print("i will view bill items")
+            display_bill_items()
         elif bill_choice == 3:
-            print("i will delete product from non printed bill")
+            display_bill_items()
+            id = int(input("Enter ITEM ID"))
+            sql = "select id from item where billid=0 and id=%s"
+            values = [id]
+            table = con.fetch(sql,values)
+            if len(table) == 0:
+                display_no_record_found()
+                key = input("press enter key to continue")
+            else:
+                sql = "delete from item where id=%s"
+                values = [id]
+                con.run(sql,values,'Item removed from non-printed bill')
         elif bill_choice == 4:
             print("i will save and print bill")
         elif bill_choice == 5:
@@ -158,31 +183,6 @@ while True:
             product_management()
         elif choice == 2:
             bill_management()
-            while True:
-                print("press 1 to add product into bill ")
-                print("press 2 to view bill items ")
-                print("press 3 to delete product from non printed bill ")
-                print("press 4 to save and print bill ")
-                print("press 5 to get details of bill between given date ")
-                print("press 6 to search for specific bill by customer name ")
-                print("Press 0 to exit to main menu")
-                bill_choice = int(input("Enter your choice"))
-                if bill_choice == 1:
-                    print("i will add product into bill")
-                elif bill_choice == 2:
-                    print("i will view bill items")
-                elif bill_choice == 3:
-                    print("i will delete product from non printed bill")
-                elif bill_choice == 4:
-                    print("i will save and print bill")
-                elif bill_choice == 5:
-                    print("i will get details of bill between given date")
-                elif bill_choice == 6:
-                    print("i will search for specific bill by customer name")
-                elif bill_choice == 0:
-                    break #will break inner loop
-                else:
-                    print("invalid bill choice")
         elif choice == 0:
             print("Thank you for yousing Saral software... ")
             break # stop loop 

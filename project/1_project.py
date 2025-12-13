@@ -1,5 +1,6 @@
 print("Saral Billing software")
 while True:
+    
     print("Press 1 for Product management")
     print("Press 2 for Bill management")
     print("Press 0 for Exit ")
@@ -58,3 +59,4 @@ while True:
         break # stop loop 
     else:
         print("invalid choice ")
+    
