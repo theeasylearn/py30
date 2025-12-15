@@ -1,6 +1,7 @@
 import connection as con 
 import shutil
 columns = shutil.get_terminal_size().columns
+billTotal = 0 #global variable
 def input_with_default(prompt, current_value):
     user_input = input(f"{prompt} [{current_value}]: ").strip()
     return current_value if user_input == "" else user_input
@@ -35,6 +36,8 @@ def display_products():
                 display_no_record_found()
             break 
 def display_bill_items():
+    global billTotal
+    billTotal = 0
     sql = "select i.id,productid,qty,i.price,name from item i,product p where i.productid=p.id order by i.id"
     table = con.fetch(sql)
     if len(table) == 0:
@@ -43,10 +46,14 @@ def display_bill_items():
         heading = f"{'ItemID':<10}{'Prod ID':<10}{'Name':<48}{'Price':<10}{'Qty':<10}{'Total':<10}"
         print(heading)
         print("-" * len(heading))
+        itemCount = 0
         for row in table:
             itemTotal = row['price'] * row['qty']
             output = f"{row['id']:<10}{row['productid']:<10}{row['name']:<48}{row['price']:<10}{row['qty']:<10}{itemTotal:<10}"
             print(output)
+            itemCount = itemCount + row['qty']
+            billTotal = billTotal + (row['qty'] * row['price'])
+        print(f"Total No of items = {itemCount} Total Bill Amount = {billTotal}")
         key = input("press enter to continue")
 def product_management():
     print("welcome to Product management")
@@ -120,6 +127,7 @@ def product_management():
         else:
             print("invalid input")    
 def bill_management():
+    global billTotal
     print("welcome to bill management")
     while True:
         print("press 1 to add product into bill ")
@@ -152,7 +160,7 @@ def bill_management():
         elif bill_choice == 3:
             display_bill_items()
             id = int(input("Enter ITEM ID"))
-            sql = "select id from item where billid=0 and id=%s"
+            sql = "select id,price,qty from item where billid=0 and id=%s"
             values = [id]
             table = con.fetch(sql,values)
             if len(table) == 0:
@@ -161,9 +169,34 @@ def bill_management():
             else:
                 sql = "delete from item where id=%s"
                 values = [id]
+                billTotal = billTotal - (table[0]['qty'] * table[0]['price'])
                 con.run(sql,values,'Item removed from non-printed bill')
         elif bill_choice == 4:
             print("i will save and print bill")
+            '''
+                1) generate bill (insert new row into bill table)
+                2) update item table set billid using newly generated bill 
+                3) update stock inside product table
+            '''
+            # 1
+            display_bill_items()
+            if billTotal == 0:
+                display_no_record_found()
+            else:
+                fullname = input("Enter customer full name")
+                mobile = input("Enter customer mobile no")
+                mode = input("Enter mode (1=cash,2=online,3=card,4=credit)")
+                sql = "insert into bill (fullname,mobile,amount,mode) values (%s,%s,%s,%s)"
+                values = [fullname,mobile,billTotal,mode]
+                con.run(sql,values,"Bill generated")
+                # 2 
+                sql = "SELECT LAST_INSERT_ID() AS last_bill_id;"
+                table = con.fetch(sql)
+                last_bill_id = table[0]['last_bill_id']
+                sql = "update item set billid = %s where billid=0"
+                values = [last_bill_id]
+                con.run(sql,values,'Item table updated')
+
         elif bill_choice == 5:
             print("i will get details of bill between given date")
         elif bill_choice == 6:

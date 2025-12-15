@@ -14,7 +14,7 @@ CREATE TABLE Product (
 CREATE TABLE Bill (
     id INT PRIMARY KEY AUTO_INCREMENT,
     fullname VARCHAR(255) NOT NULL,
-    billdate DATE NOT NULL,
+    billdate DATE DEFAULT CURRENT_DATE,
     mobile VARCHAR(15),
     amount DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     mode  int(1) NOT NULL, 
