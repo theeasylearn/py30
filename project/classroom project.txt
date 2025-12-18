@@ -30,3 +30,10 @@ id,fullname,billdate,mobile,amount,mode(payment mode)
 Item -> item table has all the items purchased in particular bill  
 ---------------------------------------------
 id,productid,qty,price,billid(default 0)
+
+
+Task
+-----------------------------------------------
+2) add one more field 'Email' into bill table 
+1) generate pdf of Bill & send it as email of bill table
+

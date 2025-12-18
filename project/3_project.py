@@ -196,7 +196,15 @@ def bill_management():
                 sql = "update item set billid = %s where billid=0"
                 values = [last_bill_id]
                 con.run(sql,values,'Item table updated')
-
+                #3
+                sql = "select productid,qty from item where billid=%s"
+                values = [last_bill_id]
+                table = con.fetch(sql,values)
+                for row in table:
+                    sql = "update product set stock=stock-%s where id=%s"
+                    values = [row['qty'],row['productid']]
+                    con.run(sql,values,'stock updated...')
+                print("all task completed successfully....")
         elif bill_choice == 5:
             print("i will get details of bill between given date")
         elif bill_choice == 6:
